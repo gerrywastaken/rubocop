@@ -59,6 +59,7 @@ module RuboCop
       def initialize(severity, location, message, cop_name,
                      status = :uncorrected)
         @severity = RuboCop::Cop::Severity.new(severity)
+        ap locationSource: location.source, locationSource_enc: location.source.encoding
         @location = location
         @message = message.freeze
         @cop_name = cop_name.freeze
@@ -98,6 +99,7 @@ module RuboCop
                           location.source_line.length - location.column
                         end
 
+        ap location_sourceLine: location.source_line, location_sourceLine_enc: location.source_line.encoding
         Parser::Source::Range.new(location.source_line,
                                   location.column,
                                   location.column + column_length)

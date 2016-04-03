@@ -102,11 +102,14 @@ module RuboCop
                           "#{location.source_line} #{ELLIPSES}"
                         end
 
-          escape(source_line[0...offense.highlighted_area.begin_pos]) +
+          escaped = escape(source_line[0...offense.highlighted_area.begin_pos]) +
             "<span class=\"highlight #{offense.severity}\">" +
             escape(offense.highlighted_area.source) +
             '</span>' +
             escape(source_line[offense.highlighted_area.end_pos..-1])
+          esc = offense.highlighted_area.source
+          ap highlighted: esc, highlighted_enc: esc.encoding
+          escaped
         end
 
         def escape(s)
